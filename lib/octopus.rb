@@ -73,7 +73,7 @@ module Octopus
   end
 
   def self.rails32?
-    ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR == 2
+    (ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR == 2) || (ActiveRecord::VERSION::MAJOR == 4 && ActiveRecord::VERSION::MINOR == 0)
   end
 
   def self.rails?
