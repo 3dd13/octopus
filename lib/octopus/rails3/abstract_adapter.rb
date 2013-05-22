@@ -3,7 +3,9 @@ module Octopus
   module AbstractAdapter
     module OctopusShard
 
-      class InstrumenterDecorator < ActiveSupport::BasicObject
+      # rails4
+      class InstrumenterDecorator < ActiveSupport::ProxyObject
+      #class InstrumenterDecorator < ActiveSupport::BasicObject
         def initialize(adapter, instrumenter)
           @adapter = adapter
           @instrumenter = instrumenter

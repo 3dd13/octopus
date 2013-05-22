@@ -75,6 +75,8 @@ module Octopus::Migrator
         alias_method_chain :up, :octopus
         alias_method_chain :down, :octopus
         alias_method_chain :run, :octopus
+        # rails4
+        alias_method_chain :current_version, :octopus
       end
     end
 
@@ -136,6 +138,12 @@ module Octopus::Migrator
       connection.send_queries_to_multiple_shards(connection.shard_names) do
         run_without_octopus(direction, migrations_paths, target_version)
       end
+    end
+
+    # rails4
+    def current_version_with_octopus
+      # set current_version equal to last_version to avoid needs_migration? check.
+      last_version
     end
 
     private
