@@ -224,6 +224,14 @@ class Octopus::Proxy
     return @shards[current_shard]
   end
 
+  # rails4
+  def clear_active_connections!
+    puts "Octopus::Proxy#clear_active_connections!"
+    @shards.each do |shard_symbol, shard|
+      shard.release_connection
+    end
+  end
+
   protected
   def connection_pool_for(adapter, config)
     #rails4

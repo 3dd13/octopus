@@ -135,6 +135,7 @@ module Octopus::Model
 
         # rails4
         #alias_method_chain(:set_table_name, :octopus)
+        alias_method_chain(:clear_active_connections!, :octopus)
 
         if Octopus.rails32?
           def table_name=(value = nil)
@@ -158,6 +159,12 @@ module Octopus::Model
     def octopus_set_table_name(value = nil)
       ActiveSupport::Deprecation.warn "Calling `octopus_set_table_name` is deprecated and will be removed in Octopus 1.0.", caller
       set_table_name(value)
+    end
+
+    # rails4
+    def clear_active_connections_with_octopus!
+      connection_proxy.clear_active_connections!
+      clear_active_connections_without_octopus!
     end
   end
 end
